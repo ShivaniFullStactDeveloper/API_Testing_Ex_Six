@@ -47,14 +47,39 @@ config/ → Environment configuration
 - API response validation
 - CRUD operation testing
 - Security testing
- 
+
+##  Folder Structure
+
+ SCOS-BACKEND/
+│
+├── src/
+│     │
+│     ├── tests/
+│          ├── auth/
+│          ├── institute/
+│          ├── mapping/
+│          ├── role/
+│          ├── security/
+│          ├── setup/
+│          ├── user/
+│          └── utils/
+│
+├── app.js
+├── server.js
+├── jest.config.js
+├── package.json
+├── package-lock.json
+├── README.md
+├── .gitignore
+└── .env.example
+
+
 ## Test Case Documentation
 
-Google Sheet Test Cases Link:
+Google Sheet Test Cases Link:-
 
-```bash
-https://docs.google.com/spreadsheets/d/1y2UXmB9cYfrinw8CCMsswHj-y129VMLMcBlicGwq4u0/edit?usp=sharing
-```
+[https://docs.google.com/spreadsheets/d/1y2UXmB9cYfrinw8CCMsswHj-y129VMLMcBlicGwq4u0/edit?usp=sharing]
+
  
 ## Installation Steps
  
@@ -85,12 +110,12 @@ npm test src/tests/auth/auth.test.js
  
 ## Test Execution Status
  
-✅ API setup completed  
-✅ Test cases implemented  
-✅ Authentication APIs tested  
-✅ User module APIs tested  
-✅ Security testing completed  
-✅ Automation execution successful  
+- API setup completed  
+- Test cases implemented  
+- Authentication APIs tested  
+- User module APIs tested  
+- Security testing completed  
+- Automation execution successful  
  
 ## Learning Outcomes
  
