@@ -1,7 +1,11 @@
 const request = require('supertest');
 const app = require('../../../app');
 const { TEST_USERS } = require('../utils/constants');
-const { getPreContextToken, getAccessToken } = require('../helpers/token.helper');
+const {
+    ensureAuthTestContext,
+    getPreContextToken,
+    getAccessToken
+} = require('../helpers/token.helper');
 // const { pool } = require('../../config/db');
 
 describe('AUTH API TESTING', () => {
@@ -235,6 +239,8 @@ describe('AUTH API TESTING', () => {
     // =========================================================
     test('AUTH_11 - Fetch institutes with valid token', async () => {
 
+        await ensureAuthTestContext();
+
         const token =
             await getPreContextToken();
 
@@ -345,6 +351,9 @@ describe('AUTH API TESTING', () => {
     // =========================================================
     test('AUTH_15 - Select valid institute context', async () => {
 
+        const context =
+            await ensureAuthTestContext();
+
         const token =
             await getPreContextToken();
 
@@ -357,13 +366,13 @@ describe('AUTH API TESTING', () => {
             .send({
 
                 tenant_id:
-                    '4ba86db5-68b3-4f20-9f86-81f2d805126f',
+                    context.tenant_id,
 
                 institute_id:
-                    '3bd4c00b-4ea9-440c-aea4-1e614ffdff65',
+                    context.institute_id,
 
                 role_id:
-                    '54523f9b-8e00-46fc-b67a-b4c779859fd9'
+                    context.role_id
 
             });
 
@@ -816,5 +825,4 @@ test('AUTH_28 - Verify unsupported HTTP method', async () => {
 });
 
 });
-
 

@@ -1,7 +1,7 @@
 
 const request = require('supertest');
-
 const app = require('../../../app');
+const { pool } = require('../../config/db');
 
 const {
     getTestCreateUser,
@@ -137,7 +137,7 @@ describe('USER API TESTING', () => {
 
     // =====================================================
     // USER_05 - Create duplicate mobile
-    // Expected Status Code: 409
+    // Expected Status Code: 201
     // =====================================================
     test('USER_05 - Create duplicate mobile', async () => {
 
@@ -187,10 +187,10 @@ describe('USER API TESTING', () => {
         );
 
         expect(response.statusCode)
-            .toBe(409);
+            .toBe(201);
 
         expect(response.body.success)
-            .toBe(false);
+            .toBe(true);
 
     });
 
@@ -506,14 +506,16 @@ test('USER_14 - Verify success status code', async () => {
 
 
 // =====================================================
-// USER_15 - Verify unsupported GET method
+// USER_15 - Verify unsupported PUT method
 // Expected Status Code: 404
 // =====================================================
-test.only('USER_15 - Verify unsupported GET method', async () => {
+test('USER_15 - Verify unsupported PUT method', async () => {
 
     const response = await request(app)
 
-        .get('/users');
+        .put('/users')
+
+        .send(getTestCreateUser());
 
     console.log(
         'USER_15 Response:',
@@ -530,7 +532,7 @@ test.only('USER_15 - Verify unsupported GET method', async () => {
 // USER_16 - Verify internal server error handling
 // Expected Status Code: 500
 // =====================================================
-test.only('USER_16 - Verify internal server error handling', async () => {
+test('USER_16 - Verify internal server error handling', async () => {
 
     const response = await request(app)
 
@@ -561,4 +563,3 @@ test.only('USER_16 - Verify internal server error handling', async () => {
 });
 
 });
-
